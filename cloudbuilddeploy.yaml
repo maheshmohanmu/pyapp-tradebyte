@@ -1,0 +1,29 @@
+steps:
+    - name: 'gcr.io/cloud-builders/docker'
+      id: Build
+      args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/essential-truth-365415/pytradebyteapp:$COMMIT_SHA'
+      - '.'
+
+    - name: 'gcr.io/cloud-builders/docker'
+      id: Push
+      args:
+      - 'push'
+      - 'gcr.io/essential-truth-365415/pytradebyteapp:$COMMIT_SHA'
+
+    - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+      entrypoint: gcloud
+      args:
+      - 'run'
+      - 'deploy'
+      - 'pytradebyteapp'
+      - '--image'
+      - 'gcr.io/essential-truth-365415/pytradebyteapp:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
+
+images:
+    - 'gcr.io/essential-truth-365415/pytradebyteapp:$COMMIT_SHA'
+# End
