@@ -3,6 +3,6 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 CMD ["python", "hello.py"] 
-#EXPOSE 5000
+EXPOSE 8000
 #ENTRYPOINT [ "python" ]
 #CMD [ "api.py" ]
