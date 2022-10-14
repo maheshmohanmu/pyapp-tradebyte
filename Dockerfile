@@ -5,4 +5,4 @@ RUN pip install -r requirements.txt
 CMD ["python3", "hello.py"]
 EXPOSE 8000
 #ENTRYPOINT [ "python" ]
-#CMD [ "api.py" ]
+#CMDD [ "api.py" ]
