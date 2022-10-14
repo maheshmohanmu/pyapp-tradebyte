@@ -25,11 +25,6 @@ steps:
       - 'us-central1'
       - '--set-env-vars'
       - 'ENVIRONMENT=DEV'
-      - 'HOST=localhost'
-      - 'PORT=8000'
-      - 'REDIS_HOST=localhost'
-      - 'REDIS_PORT=6379'
-      - 'REDIS_DB=0'
 
 images:
     - 'gcr.io/essential-truth-365415/pytradebyteapp:$COMMIT_SHA'
