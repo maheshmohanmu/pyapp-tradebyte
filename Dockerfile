@@ -1,8 +1,8 @@
-FROM python:3.10-slim
+FROM python:3.9
 COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
-CMD ["python", "hello.py"] 
+CMD ["python3", "hello.py"]
 EXPOSE 8000
 #ENTRYPOINT [ "python" ]
 #CMD [ "api.py" ]
