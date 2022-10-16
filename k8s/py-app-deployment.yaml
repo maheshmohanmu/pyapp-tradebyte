@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: py-app
+  name: py-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: py-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        network/dev-network: "true"
+        service: py-app
+    spec:
+      containers:
+        - env:
+            - name: ENVIRONMENT
+              value: DEV
+            - name: HOST
+              value: localhost
+            - name: PORT
+              value: "8000"
+            - name: REDIS_DB
+              value: "0"
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+          image: gcr.io/essential-truth-365415/pytradebyteapp:latest
+          name: py_app
+          ports:
+            - containerPort: 8000
+          resources: {}
+      restartPolicy: Always
+status: {}

@@ -1,41 +1,26 @@
 steps:
     - name: 'gcr.io/cloud-builders/docker'
-      id: Build
+      id: PyAppBuild
       args:
       - 'build'
       - '-t'
-      - 'gcr.io/essential-truth-365415/pytradebyteapp:$COMMIT_SHA'
+      - 'gcr.io/essential-truth-365415/pytradebyteapp:latest'
       - '.'
 
     - name: 'gcr.io/cloud-builders/docker'
-      id: Push
+      id: PyAppPush
       args:
       - 'push'
-      - 'gcr.io/essential-truth-365415/pytradebyteapp:$COMMIT_SHA'
+      - 'gcr.io/essential-truth-365415/pytradebyteapp:latest'
 
-    - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-      entrypoint: gcloud
+    - name: 'gcr.io/cloud-builders/gke-deploy'
       args:
-      - 'run'
-      - 'deploy'
-      - 'pytradebyteapp'
-      - '--image'
-      - 'gcr.io/essential-truth-365415/pytradebyteapp:$COMMIT_SHA'
-      - '--region'
-      - 'us-central1'
-      - '--set-env-vars'
-      - 'ENVIRONMENT=DEV'
-      - '--set-env-vars'
-      - 'HOST=localhost'
-#      - '--set-env-vars'
-#      - 'PORT=8000'
-      - '--set-env-vars'
-      - 'REDIS_HOST=localhost'
-      - '--set-env-vars'
-      - 'REDIS_PORT=6379'
-      - '--set-env-vars'
-      - 'REDIS_DB=0'
+        - run
+        - --filename=k8s/
+#        - --image=gcr.io/project-id/image:tag
+        - --location=us-central1
+        - --cluster=pyapp-cluster-1
 
 images:
-    - 'gcr.io/essential-truth-365415/pytradebyteapp:$COMMIT_SHA'
+    - 'gcr.io/essential-truth-365415/pytradebyteapp:latest'
 # End
