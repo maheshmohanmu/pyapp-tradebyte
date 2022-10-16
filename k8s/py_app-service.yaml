@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     service: py-app
-  name: py_app
+  name: py-app
 spec:
   ports:
     - name: "8000"
