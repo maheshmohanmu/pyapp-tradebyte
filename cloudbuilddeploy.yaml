@@ -1,4 +1,11 @@
 steps:
+    - name: 'python:3.9-slim'
+      id: UnitTest
+      entrypoint: /bin/sh
+      args:
+      - '-c'
+      - 'python tests/test.py'
+
     - name: 'gcr.io/cloud-builders/docker'
       id: PyAppBuild
       args:
