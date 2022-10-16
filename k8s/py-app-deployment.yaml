@@ -17,7 +17,7 @@ spec:
         service: py-app
     spec:
       containers:
-      - name: py-app
+      - name: pyapp
         image: gcr.io/essential-truth-365415/pytradebyteapp:latest
         ports:
         - containerPort: 8000
