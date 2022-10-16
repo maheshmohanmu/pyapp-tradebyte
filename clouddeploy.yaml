@@ -1,0 +1,25 @@
+apiVersion: deploy.cloud.google.com/v1beta1
+kind: DeliveryPipeline
+metadata:
+  name: pyapp-tradebyte
+description: PyApp Deployment Pipeline
+serialPipeline:
+  stages:
+    - targetId: dev
+    - targetId: production
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: dev
+description: DEV Environment
+gke:
+  cluster: projects/essential-truth-365415/locations/us-east1-b/clusters/py-cluster-1
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: production
+description: Production Environment
+gke:
+  cluster: projects/essential-truth-365415/locations/us-south1-b/clusters/py-cluster-prod

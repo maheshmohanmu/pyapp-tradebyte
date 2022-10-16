@@ -1,0 +1,36 @@
+steps:
+    - name: 'python:3.9-slim'
+      id: UnitTest
+      entrypoint: /bin/sh
+      args:
+      - '-c'
+      - 'python tests/test.py'
+
+    - name: 'gcr.io/cloud-builders/docker'
+      id: PyAppBuild
+      args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/essential-truth-365415/pytradebyteapp:${SHORT_SHA}'
+      - '.'
+
+    - name: 'gcr.io/cloud-builders/docker'
+      id: PyAppPush
+      args:
+      - 'push'
+      - 'gcr.io/essential-truth-365415/pytradebyteapp:${SHORT_SHA}'
+
+    - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+      entrypoint: gcloud
+      args:
+        [
+          "deploy", "releases", "create", "rel-${SHORT_SHA}",
+          "--delivery-pipeline", "pyapp-tradebyte",
+          "--region", "us-central1",
+          "--annotations", "commitId=${REVISION_ID}",
+          "--images", "pyappimage=gcr.io/essential-truth-365415/pytradebyteapp:${SHORT_SHA}"
+        ]
+
+images:
+    - 'gcr.io/essential-truth-365415/pytradebyteapp:${SHORT_SHA}'
+# End
