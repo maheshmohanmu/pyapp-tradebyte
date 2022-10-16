@@ -11,5 +11,6 @@ spec:
       targetPort: 8000
   selector:
     service: py-app
+  type: LoadBalancer
 status:
   loadBalancer: {}
