@@ -1,8 +1,9 @@
 .idea/
 k8s/
+.git
 .gitignore
-.cloudbuild.yaml
-.clouddeploy.yaml
+cloudbuild.yaml
+clouddeploy.yaml
 LICENSE
 README.md
 skaffold.yaml
