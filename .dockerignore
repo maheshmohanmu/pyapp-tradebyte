@@ -1,0 +1,8 @@
+.idea/
+k8s/
+.gitignore
+.cloudbuild.yaml
+.clouddeploy.yaml
+LICENSE
+README.md
+skaffold.yaml
